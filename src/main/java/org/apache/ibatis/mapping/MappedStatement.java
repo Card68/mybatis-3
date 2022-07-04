@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.executor.keygen.Jdbc3KeyGenerator;
 import org.apache.ibatis.executor.keygen.KeyGenerator;
@@ -198,60 +201,16 @@ public final class MappedStatement {
     }
   }
 
-  public KeyGenerator getKeyGenerator() {
-    return keyGenerator;
-  }
-
-  public SqlCommandType getSqlCommandType() {
-    return sqlCommandType;
-  }
-
-  public String getResource() {
-    return resource;
-  }
-
-  public Configuration getConfiguration() {
-    return configuration;
-  }
-
-  public String getId() {
-    return id;
-  }
+  
 
   public boolean hasNestedResultMaps() {
     return hasNestedResultMaps;
   }
 
-  public Integer getFetchSize() {
-    return fetchSize;
-  }
-
-  public Integer getTimeout() {
-    return timeout;
-  }
-
-  public StatementType getStatementType() {
-    return statementType;
-  }
-
-  public ResultSetType getResultSetType() {
-    return resultSetType;
-  }
-
-  public SqlSource getSqlSource() {
-    return sqlSource;
-  }
-
-  public ParameterMap getParameterMap() {
-    return parameterMap;
-  }
+  
 
   public List<ResultMap> getResultMaps() {
     return resultMaps;
-  }
-
-  public Cache getCache() {
-    return cache;
   }
 
   public boolean isFlushCacheRequired() {
@@ -266,9 +225,7 @@ public final class MappedStatement {
     return resultOrdered;
   }
 
-  public String getDatabaseId() {
-    return databaseId;
-  }
+
 
   public String[] getKeyProperties() {
     return keyProperties;
