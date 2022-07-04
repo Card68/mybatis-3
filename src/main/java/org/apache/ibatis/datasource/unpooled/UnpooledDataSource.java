@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 package org.apache.ibatis.datasource.unpooled;
-
+import lombok.*;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Driver;
@@ -36,6 +36,8 @@ import org.apache.ibatis.io.Resources;
  * @author Clinton Begin
  * @author Eduardo Macarron
  */
+@Getter
+@Setter
 public class UnpooledDataSource implements DataSource {
 
   private ClassLoader driverClassLoader;
@@ -120,80 +122,20 @@ public class UnpooledDataSource implements DataSource {
     return DriverManager.getLogWriter();
   }
 
-  public ClassLoader getDriverClassLoader() {
-    return driverClassLoader;
-  }
+  
 
-  public void setDriverClassLoader(ClassLoader driverClassLoader) {
-    this.driverClassLoader = driverClassLoader;
-  }
 
-  public Properties getDriverProperties() {
-    return driverProperties;
-  }
+  
 
-  public void setDriverProperties(Properties driverProperties) {
-    this.driverProperties = driverProperties;
-  }
-
-  public synchronized String getDriver() {
-    return driver;
-  }
-
-  public synchronized void setDriver(String driver) {
-    this.driver = driver;
-  }
-
-  public String getUrl() {
-    return url;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
-  }
-
-  public String getUsername() {
-    return username;
-  }
-
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
+  
 
   public Boolean isAutoCommit() {
     return autoCommit;
   }
 
-  public void setAutoCommit(Boolean autoCommit) {
-    this.autoCommit = autoCommit;
-  }
+  
 
-  public Integer getDefaultTransactionIsolationLevel() {
-    return defaultTransactionIsolationLevel;
-  }
-
-  public void setDefaultTransactionIsolationLevel(Integer defaultTransactionIsolationLevel) {
-    this.defaultTransactionIsolationLevel = defaultTransactionIsolationLevel;
-  }
-
-  /**
-   * Gets the default network timeout.
-   *
-   * @return the default network timeout
-   * @since 3.5.2
-   */
-  public Integer getDefaultNetworkTimeout() {
-    return defaultNetworkTimeout;
-  }
-
+  
   /**
    * Sets the default network timeout value to wait for the database operation to complete. See {@link Connection#setNetworkTimeout(java.util.concurrent.Executor, int)}
    *
@@ -201,10 +143,7 @@ public class UnpooledDataSource implements DataSource {
    *          The time in milliseconds to wait for the database operation to complete.
    * @since 3.5.2
    */
-  public void setDefaultNetworkTimeout(Integer defaultNetworkTimeout) {
-    this.defaultNetworkTimeout = defaultNetworkTimeout;
-  }
-
+  
   private Connection doGetConnection(String username, String password) throws SQLException {
     Properties props = new Properties();
     if (driverProperties != null) {
