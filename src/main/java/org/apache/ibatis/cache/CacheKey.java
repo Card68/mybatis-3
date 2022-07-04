@@ -15,6 +15,7 @@
  */
 package org.apache.ibatis.cache;
 
+import lombok.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,8 @@ import org.apache.ibatis.reflection.ArrayUtil;
 /**
  * @author Clinton Begin
  */
+@EqualsAndHashCode
+@ToString
 public class CacheKey implements Cloneable, Serializable {
 
   private static final long serialVersionUID = 1146682552656046210L;
@@ -87,50 +90,6 @@ public class CacheKey implements Cloneable, Serializable {
     }
   }
 
-  @Override
-  public boolean equals(Object object) {
-    if (this == object) {
-      return true;
-    }
-    if (!(object instanceof CacheKey)) {
-      return false;
-    }
-
-    final CacheKey cacheKey = (CacheKey) object;
-
-    if (hashcode != cacheKey.hashcode) {
-      return false;
-    }
-    if (checksum != cacheKey.checksum) {
-      return false;
-    }
-    if (count != cacheKey.count) {
-      return false;
-    }
-
-    for (int i = 0; i < updateList.size(); i++) {
-      Object thisObject = updateList.get(i);
-      Object thatObject = cacheKey.updateList.get(i);
-      if (!ArrayUtil.equals(thisObject, thatObject)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  @Override
-  public int hashCode() {
-    return hashcode;
-  }
-
-  @Override
-  public String toString() {
-    StringJoiner returnValue = new StringJoiner(":");
-    returnValue.add(String.valueOf(hashcode));
-    returnValue.add(String.valueOf(checksum));
-    updateList.stream().map(ArrayUtil::toString).forEach(returnValue::add);
-    return returnValue.toString();
-  }
 
   @Override
   public CacheKey clone() throws CloneNotSupportedException {
