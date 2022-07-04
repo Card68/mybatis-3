@@ -15,6 +15,7 @@
  */
 package org.apache.ibatis.datasource.pooled;
 
+import lombok.*;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -26,6 +27,10 @@ import org.apache.ibatis.reflection.ExceptionUtil;
 /**
  * @author Clinton Begin
  */
+
+@EqualsAndHashCode
+@Getter
+@Setter
 class PooledConnection implements InvocationHandler {
 
   private static final String CLOSE = "close";
@@ -75,23 +80,6 @@ class PooledConnection implements InvocationHandler {
     return valid && realConnection != null && dataSource.pingConnection(this);
   }
 
-  /**
-   * Getter for the *real* connection that this wraps.
-   *
-   * @return The connection
-   */
-  public Connection getRealConnection() {
-    return realConnection;
-  }
-
-  /**
-   * Getter for the proxy for the connection.
-   *
-   * @return The proxy
-   */
-  public Connection getProxyConnection() {
-    return proxyConnection;
-  }
 
   /**
    * Gets the hashcode of the real connection (or 0 if it is null).
@@ -107,58 +95,7 @@ class PooledConnection implements InvocationHandler {
    *
    * @return The connection type
    */
-  public int getConnectionTypeCode() {
-    return connectionTypeCode;
-  }
-
-  /**
-   * Setter for the connection type.
-   *
-   * @param connectionTypeCode
-   *          - the connection type
-   */
-  public void setConnectionTypeCode(int connectionTypeCode) {
-    this.connectionTypeCode = connectionTypeCode;
-  }
-
-  /**
-   * Getter for the time that the connection was created.
-   *
-   * @return The creation timestamp
-   */
-  public long getCreatedTimestamp() {
-    return createdTimestamp;
-  }
-
-  /**
-   * Setter for the time that the connection was created.
-   *
-   * @param createdTimestamp
-   *          - the timestamp
-   */
-  public void setCreatedTimestamp(long createdTimestamp) {
-    this.createdTimestamp = createdTimestamp;
-  }
-
-  /**
-   * Getter for the time that the connection was last used.
-   *
-   * @return - the timestamp
-   */
-  public long getLastUsedTimestamp() {
-    return lastUsedTimestamp;
-  }
-
-  /**
-   * Setter for the time that the connection was last used.
-   *
-   * @param lastUsedTimestamp
-   *          - the timestamp
-   */
-  public void setLastUsedTimestamp(long lastUsedTimestamp) {
-    this.lastUsedTimestamp = lastUsedTimestamp;
-  }
-
+  
   /**
    * Getter for the time since this connection was last used.
    *
@@ -182,9 +119,7 @@ class PooledConnection implements InvocationHandler {
    *
    * @return the timestamp
    */
-  public long getCheckoutTimestamp() {
-    return checkoutTimestamp;
-  }
+
 
   /**
    * Setter for the timestamp that this connection was checked out.
@@ -192,10 +127,6 @@ class PooledConnection implements InvocationHandler {
    * @param timestamp
    *          the timestamp
    */
-  public void setCheckoutTimestamp(long timestamp) {
-    this.checkoutTimestamp = timestamp;
-  }
-
   /**
    * Getter for the time that this connection has been checked out.
    *
@@ -217,16 +148,7 @@ class PooledConnection implements InvocationHandler {
    *          - the other connection to test for equality
    * @see Object#equals(Object)
    */
-  @Override
-  public boolean equals(Object obj) {
-    if (obj instanceof PooledConnection) {
-      return realConnection.hashCode() == ((PooledConnection) obj).realConnection.hashCode();
-    } else if (obj instanceof Connection) {
-      return hashCode == obj.hashCode();
-    } else {
-      return false;
-    }
-  }
+
 
   /**
    * Required for InvocationHandler implementation.
