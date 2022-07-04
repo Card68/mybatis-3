@@ -33,7 +33,11 @@ import org.apache.ibatis.session.Configuration;
 
 /**
  * @author Clinton Begin
+ * 
+ * 
  */
+@Getter 
+@Setter
 public final class MappedStatement {
 
   private String resource;

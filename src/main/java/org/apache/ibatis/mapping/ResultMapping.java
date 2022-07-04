@@ -20,6 +20,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import lombok.*;
+
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
@@ -28,6 +30,11 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
 /**
  * @author Clinton Begin
  */
+
+@Getter
+@Setter
+@EqualsAndHashCode
+
 public class ResultMapping {
 
   private Configuration configuration;
@@ -183,41 +190,23 @@ public class ResultMapping {
     }
   }
 
-  public String getProperty() {
-    return property;
-  }
-
-  public String getColumn() {
-    return column;
-  }
+  
 
   public Class<?> getJavaType() {
     return javaType;
   }
 
-  public JdbcType getJdbcType() {
-    return jdbcType;
-  }
-
+  
   public TypeHandler<?> getTypeHandler() {
     return typeHandler;
   }
 
-  public String getNestedResultMapId() {
-    return nestedResultMapId;
-  }
-
-  public String getNestedQueryId() {
-    return nestedQueryId;
-  }
 
   public Set<String> getNotNullColumns() {
     return notNullColumns;
   }
 
-  public String getColumnPrefix() {
-    return columnPrefix;
-  }
+
 
   public List<ResultFlag> getFlags() {
     return flags;
@@ -235,9 +224,7 @@ public class ResultMapping {
     return this.resultSet;
   }
 
-  public String getForeignColumn() {
-    return foreignColumn;
-  }
+  
 
   public void setForeignColumn(String foreignColumn) {
     this.foreignColumn = foreignColumn;
@@ -255,30 +242,6 @@ public class ResultMapping {
     return this.nestedResultMapId == null && this.nestedQueryId == null && this.resultSet == null;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-
-    ResultMapping that = (ResultMapping) o;
-
-    return property != null && property.equals(that.property);
-  }
-
-  @Override
-  public int hashCode() {
-    if (property != null) {
-      return property.hashCode();
-    } else if (column != null) {
-      return column.hashCode();
-    } else {
-      return 0;
-    }
-  }
 
   @Override
   public String toString() {

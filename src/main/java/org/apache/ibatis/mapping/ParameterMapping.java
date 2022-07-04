@@ -27,6 +27,9 @@ import lombok.Setter;
 /**
  * @author Clinton Begin
  */
+
+ @Getter
+ @Setter
 public class ParameterMapping {
 
   private Configuration configuration;
