@@ -16,10 +16,14 @@
 package org.apache.ibatis.executor.result;
 
 import org.apache.ibatis.session.ResultContext;
+import lombok.*;
 
 /**
  * @author Clinton Begin
  */
+
+@Getter
+@Setter
 public class DefaultResultContext<T> implements ResultContext<T> {
 
   private T resultObject;
@@ -32,20 +36,7 @@ public class DefaultResultContext<T> implements ResultContext<T> {
     stopped = false;
   }
 
-  @Override
-  public T getResultObject() {
-    return resultObject;
-  }
-
-  @Override
-  public int getResultCount() {
-    return resultCount;
-  }
-
-  @Override
-  public boolean isStopped() {
-    return stopped;
-  }
+  
 
   public void nextResultObject(T resultObject) {
     resultCount++;
