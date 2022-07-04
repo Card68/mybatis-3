@@ -21,6 +21,8 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Clinton Begin
@@ -131,9 +133,6 @@ public class ParameterMapping {
 
   }
 
-  public String getProperty() {
-    return property;
-  }
 
   /**
    * Used for handling output of callable statements.
@@ -158,18 +157,14 @@ public class ParameterMapping {
    *
    * @return the jdbc type
    */
-  public JdbcType getJdbcType() {
-    return jdbcType;
-  }
+  
 
   /**
    * Used for handling output of callable statements.
    *
    * @return the numeric scale
    */
-  public Integer getNumericScale() {
-    return numericScale;
-  }
+  
 
   /**
    * Used when setting parameters to the PreparedStatement.
@@ -185,27 +180,20 @@ public class ParameterMapping {
    *
    * @return the result map id
    */
-  public String getResultMapId() {
-    return resultMapId;
-  }
+
 
   /**
    * Used for handling output of callable statements.
    *
    * @return the jdbc type name
    */
-  public String getJdbcTypeName() {
-    return jdbcTypeName;
-  }
+ 
 
   /**
    * Expression 'Not used'.
    *
    * @return the expression
    */
-  public String getExpression() {
-    return expression;
-  }
 
   @Override
   public String toString() {
